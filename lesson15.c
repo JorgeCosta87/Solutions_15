@@ -264,3 +264,103 @@ void ConfigLCD(void){
 	WritetoLCD(0b00000110,0);	// escreve da esquerda para a direita 
 	WritetoLCD(0b10000000,0);	// escreve na primeira linha
 }
+
+#include "C8051F340.h"
+
+
+#define DIM 10
+
+__code unsigned char Tabela[]={0b11000000,0b11111001,0b10100100, 0b10110000,0b10011001, 0b10010010,0b10000011, 0b11111000, 0b10000000, 0b10011000}; 
+
+
+/*
+ex_07
+
+*/
+
+void main(void)
+{
+	char unsigned var = 0b00101010;
+	char unsigned testVar = 0b00000000;
+
+	while(1)
+	{
+		switch(testVar)
+		{
+			case 0 :
+			{
+				if (var&0b00000001)
+					P1 = 0b11000000;
+				else
+					P1 = 0b10111111;
+				testVar=1;
+				break;
+			}
+			case 1 :
+			{
+				if (var&0b00000010)
+					P1 = 0b11111001;
+				else
+					P1 = 0b10111111;
+				testVar=2;
+				break;
+			}
+			case 2 :
+			{
+				if (var&0b00000100)
+					P1 = 0b10100100;
+				else
+					P1 = 0b10111111;
+				testVar=3;
+				break;
+			}
+			case 3 :
+			{
+				if (var&0b00001000)
+					P1 = 0b10011001;
+				else
+					P1 = 0b10111111;
+				testVar=4;
+				break;
+			}
+			case 4 :
+			{
+				if (var&0b00010000)
+					P1 = 0b10010010;
+				else
+					P1 = 0b10111111;
+				testVar=5;
+				break;
+			}
+			case 5 :
+			{
+				if (var&0b00100000)
+					P1 = 0b10000011;
+				else
+					P1 = 0b10111111;
+				testVar=6;
+				break;
+			}
+			case 6 :
+			{
+				if (var&0b010000000)
+					P1 = 0b11111000;
+				else
+					P1 = 0b10111111;
+				testVar=7;
+				break;
+			}
+			case 7 :
+			{
+				if (var&0b10000000)
+					P1 = 0b10000000;
+				else
+					P1 = 0b10111111;
+				testVar=0;
+				break;
+			}
+		}
+	}
+	
+
+}
